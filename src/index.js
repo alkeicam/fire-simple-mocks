@@ -11,6 +11,7 @@ class AuthMock {
     }
 
     getUser() { };
+    getUserByEmail() { };
     createUser() { };
     setCustomUserClaims() { };
 
@@ -79,6 +80,37 @@ class AuthMock {
             };
         })
         return this.getUserStub;
+    }
+    stubGetUserByEmail(userRecordPromise) {
+        var that = this;
+        var stub = sinon.stub(this, 'getUserByEmail').returns(userRecordPromise);
+
+
+
+        this.authStub.get(function getterFn() {
+            return () => {
+                return that;
+            };
+        })
+
+        return stub;
+
+    };
+
+    stubGetUserByEmailWithMatcher(userRecordPromise, matcher) {
+        var that = this;
+        if (!this.getUserByEmailStub) {
+            this.getUserByEmailStub = sinon.stub(this, 'getUserByEmail');
+        }
+        this.getUserByEmailStub.withArgs(matcher).returns(userRecordPromise);
+
+
+        this.authStub.get(function getterFn() {
+            return () => {
+                return that;
+            };
+        })
+        return this.getUserByEmailStub;
     }
 
     stubCreateUser(userRecordPromise, matcher) {
