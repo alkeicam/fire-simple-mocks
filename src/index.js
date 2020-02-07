@@ -7,6 +7,8 @@ class AuthMock {
         this.authStub = sinon.stub(admin, 'auth');
         this.getUserStub = undefined;
         this.setCustomUserClaimsStub = undefined;
+        this.generatePasswordResetLinkStub = undefined;
+        this.generateEmailVerificationLinkStub = undefined;
         this.instance = Math.round(Math.random() * 2000);
     }
 
@@ -14,6 +16,74 @@ class AuthMock {
     getUserByEmail() { };
     createUser() { };
     setCustomUserClaims() { };
+    generatePasswordResetLink() {};
+    generateEmailVerificationLink() {};
+
+    stubGenerateEmailVerificationLink(resultPromise) {
+        var that = this;
+        if (!this.generateEmailVerificationLinkStub) {
+            this.generateEmailVerificationLinkStub = sinon.stub(this, 'generateEmailVerificationLink');
+        }
+        this.generateEmailVerificationLinkStub.returns(resultPromise);
+
+
+        this.authStub.get(function getterFn() {
+            return () => {
+                return that;
+            };
+        })
+
+        return this.generateEmailVerificationLinkStub;
+    }
+
+    stubGenerateEmailVerificationLink(resultPromise, matcher) {
+        var that = this;
+        if (!this.generateEmailVerificationLinkStub) {
+            this.generateEmailVerificationLinkStub = sinon.stub(this, 'generateEmailVerificationLink');
+        }
+        this.generateEmailVerificationLinkStub.withArgs(matcher).returns(resultPromise);
+
+
+        this.authStub.get(function getterFn() {
+            return () => {
+                return that;
+            };
+        })
+        return this.generateEmailVerificationLinkStub
+    }
+
+    stubGeneratePasswordResetLink(resultPromise) {
+        var that = this;
+        if (!this.generatePasswordResetLinkStub) {
+            this.generatePasswordResetLinkStub = sinon.stub(this, 'generatePasswordResetLink');
+        }
+        this.generatePasswordResetLinkStub.returns(resultPromise);
+
+
+        this.authStub.get(function getterFn() {
+            return () => {
+                return that;
+            };
+        })
+
+        return this.generatePasswordResetLinkStub;
+    }
+
+    stubGeneratePasswordResetLink(resultPromise, matcher) {
+        var that = this;
+        if (!this.generatePasswordResetLinkStub) {
+            this.generatePasswordResetLinkStub = sinon.stub(this, 'generatePasswordResetLink');
+        }
+        this.generatePasswordResetLinkStub.withArgs(matcher).returns(resultPromise);
+
+
+        this.authStub.get(function getterFn() {
+            return () => {
+                return that;
+            };
+        })
+        return this.generatePasswordResetLinkStub
+    }
 
     stubSetCustomUserClaims(resultPromise) {
         var that = this;
@@ -150,6 +220,8 @@ class AuthMock {
         if (this.getUser.restore instanceof Function) {
             this.getUser.restore();
             this.getUserStub = undefined;
+            this.generatePasswordResetLinkStub = undefined;
+            this.generateEmailVerificationLinkStub = undefined;
         }
     }
 }
