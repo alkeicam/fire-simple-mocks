@@ -36,7 +36,7 @@ class AuthMock {
         return this.generateEmailVerificationLinkStub;
     }
 
-    stubGenerateEmailVerificationLink(resultPromise, matcher) {
+    stubGenerateEmailVerificationLinkWithMatcher(resultPromise, matcher) {
         var that = this;
         if (!this.generateEmailVerificationLinkStub) {
             this.generateEmailVerificationLinkStub = sinon.stub(this, 'generateEmailVerificationLink');
@@ -69,7 +69,7 @@ class AuthMock {
         return this.generatePasswordResetLinkStub;
     }
 
-    stubGeneratePasswordResetLink(resultPromise, matcher) {
+    stubGeneratePasswordResetLinkWithMatcher(resultPromise, matcher) {
         var that = this;
         if (!this.generatePasswordResetLinkStub) {
             this.generatePasswordResetLinkStub = sinon.stub(this, 'generatePasswordResetLink');
