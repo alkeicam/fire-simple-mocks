@@ -1,6 +1,6 @@
 {
   "name": "fire-simple-mocks",
-  "version": "1.0.29",
+  "version": "1.0.30",
   "description": "Simple mocks for developing firebase functions",
   "main": "./src/index.js",
   "scripts": {
