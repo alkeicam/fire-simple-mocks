@@ -423,5 +423,6 @@ module.exports = {
     ReferenceMock,
     DatabaseMock,
     SnapshotMock,
-    AuthMock
+    AuthMock,
+    FunctionsMock
 }
