@@ -1,6 +1,24 @@
 // Sinon is a library used for mocking or verifying function calls in JavaScript.
 const sinon = require('sinon');
 const admin = require('firebase-admin');
+const functions = require('firebase-functions');
+
+class FunctionsMock {
+    constructor() {
+        //this.stub = sinon.stub(functions, 'config');      
+        this.cstub = undefined;  
+        this.instance = Math.round(Math.random() * 2000);
+    }
+
+    stubConfig(configValue) {
+        var that = this;
+        if (!this.cstub) {
+            this.cstub = sinon.stub(this, 'config');
+        }
+        this.cstub.returns(configValue);        
+        return this.cstub;
+    }
+}
 
 class AuthMock {
     constructor() {
