@@ -5,18 +5,14 @@ const functions = require('firebase-functions');
 
 class FunctionsMock {
     constructor() {
-        //this.stub = sinon.stub(functions, 'config');      
-        this.cstub = undefined;  
+        this.stub = sinon.stub(functions, 'config');      
+        
         this.instance = Math.round(Math.random() * 2000);
     }
 
-    stubConfig(configValue) {
-        var that = this;
-        if (!this.cstub) {
-            this.cstub = sinon.stub(this, 'config');
-        }
-        this.cstub.returns(configValue);        
-        return this.cstub;
+    stubConfig(configValue) {        
+        this.stub.returns(configValue);        
+        return this.stub;
     }
 }
 
