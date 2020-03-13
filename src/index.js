@@ -335,6 +335,11 @@ class ReferenceMock {
         return this.ref;
     }
 
+    stubPath(path) {
+        this.path = path;
+        return this.path;
+    }
+
     stubOnce(promise) {
         return sinon.stub(this, 'once').returns(promise);
     }
