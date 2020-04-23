@@ -32,6 +32,40 @@ class AuthMock {
     setCustomUserClaims() { };
     generatePasswordResetLink() {};
     generateEmailVerificationLink() {};
+    updateUser() {};
+
+    stubUpdateUser(userRecordPromise, matcher) {
+        var that = this;
+        if (!this.updateUserStub) {
+            this.updateUserStub = sinon.stub(this, 'updateUser');
+        }
+        this.updateUserStub.returns(userRecordPromise);
+
+
+        this.authStub.get(function getterFn() {
+            return () => {
+                return that;
+            };
+        })
+        return this.updateUserStub;
+
+    }
+
+    stubUpdateUserWithMatcher(userRecordPromise, matcher) {
+        var that = this;
+        if (!this.updateUserStub) {
+            this.updateUserStub = sinon.stub(this, 'updateUser');
+        }
+        this.updateUserStub.withArgs(matcher).returns(userRecordPromise);
+
+
+        this.authStub.get(function getterFn() {
+            return () => {
+                return that;
+            };
+        })
+        return this.updateUserStub;
+    }
 
     stubGenerateEmailVerificationLink(resultPromise) {
         var that = this;
