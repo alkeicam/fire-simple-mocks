@@ -33,6 +33,7 @@ class AuthMock {
     generatePasswordResetLink() {};
     generateEmailVerificationLink() {};
     updateUser() {};
+    user(){};
 
     stubUpdateUser(userRecordPromise, matcher) {
         var that = this;
@@ -415,7 +416,8 @@ class SnapshotMock {
 
     val() { };
     forEach() { };
-    exists() { }
+    exists() { };
+    hasChildren() {};
 
     stubExists(returnBoolean) {
         return sinon.stub(this, 'exists').returns(returnBoolean);
@@ -424,6 +426,10 @@ class SnapshotMock {
 
     stubVal(returnObject) {
         return sinon.stub(this, 'val').returns(returnObject);
+    }
+
+    stubHasChildren(returnBoolean){
+        return sinon.stub(this, 'hasChildren').returns(returnBoolean);
     }
 
     stubRef(referenceMock) {
